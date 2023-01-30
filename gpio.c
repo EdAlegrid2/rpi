@@ -25,17 +25,17 @@
 /**
  * Circuit Setup
  *
- * Connect momentary switch buttons to inputPin (pin 11) and inputPin2 (pin 13).
- * Connect LED's to outputPin (pin 33) and statusPin (pin 38).
+ * Connect momentary switch buttons to pin 11(GPIO 17) and pin 13(GPIO 27).
+ * Connect LED's to pin 33(GPIO 13) and pin 38(GPIO 20).
  */
 
 /* input pins */
-uint8_t inputPin1 = 17;		//switch to turn ON  LED output
-uint8_t inputPin2 = 27;		//switch to turn OFF LED output
+uint8_t inputPin1 = 17;		// switch to turn ON  LED output
+uint8_t inputPin2 = 27;		// switch to turn OFF LED output
 
 /* output pins */
-uint8_t outputPin = 13;		//LED output
-uint8_t statusPin = 20;		//LED status indicator
+uint8_t outputPin = 13;		// LED output
+uint8_t statusPin = 20;		// LED status indicator
 
 /* Ctrl-C handler */
 void sighandler(int signum)
@@ -44,10 +44,10 @@ void sighandler(int signum)
 	gpio_reset_all_events(inputPin1);
         gpio_reset_all_events(inputPin2);
 
-        gpio_write(statusPin, 0);  //turn OFF
-        gpio_config(statusPin, 0); //set to GPIO input
-	gpio_write(outputPin, 0);  //turn OFF
-        gpio_config(outputPin, 0); //set to GPIO input
+        gpio_write(statusPin, 0);  // turn OFF statusPin
+        gpio_config(statusPin, 0); // set to GPIO input
+	gpio_write(outputPin, 0);  // turn OFF outputPin
+        gpio_config(outputPin, 0); // set to GPIO input
         
         puts("closing rpi ...");
    	rpi_close();
@@ -83,7 +83,7 @@ int main(void){
 
     		gpio_write(statusPin, 1);
 
-                /* press inputPin switch to turn ON LED output */
+                /* press inputPin1 switch to turn ON LED output */
     		if(gpio_read(inputPin1)){
 			puts("turning ON  outputPin ...");
       			gpio_write(outputPin, 1);
